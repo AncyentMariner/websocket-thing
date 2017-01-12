@@ -1,18 +1,24 @@
 const path = require('path');
 const express = require('express');
+const http = require('http');
+const socketIO = require('socket.io');
 
-const app = express();
 const publicPath = path.join(__dirname, '../public');
 const port = process.env.PORT || 3000;
+const app = express();
+let server = http.createServer(app);
+let io = socketIO(server);
 
 app.use(express.static(publicPath));
 
+io.on('connection', (socket) => {
+  console.log('new connection');
 
-// app.get('/', (req, res) => {
-//   res.sendFile(publicPath + '/index.html');
-// });
+  socket.on('disconnect', () => {
+    console.log('connection with server broken');
+  });
+});
 
-
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`server is running on port ${port}`);
 });
