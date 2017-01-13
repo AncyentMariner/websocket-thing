@@ -9,6 +9,15 @@
   <body>
     <p>this is a thing</p>
 
+    <form id="message-form">
+      <ul id="message-list"></ul>
+
+      <input name="message" type="text" placeholder="enter message" autofocus autocomplete="off"/>
+      <button>Send</button>
+    </form>
+    <div id="locationBox"></div>
+    <button id="send-location">Send Location</button>
+
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/index.js"></script>
   </body>
